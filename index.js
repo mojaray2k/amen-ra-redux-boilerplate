@@ -39,9 +39,15 @@
  function todos (state = [], action) {
   if(action.type === 'ADD_TODO') {
     return state.concat([action.todo])
-  }
-
-  return state
+  } else if (action.type === 'REMOVE_TODO'){
+    return state.filter((todo) => todo.id !== action.id)
+  } else if (action.type === 'TOGGLE_TODO'){
+    return state.map((todo) =>  todo.id !== action.id ? todo : 
+      Object.assign({}, todo, {complete: !todo.complete})
+    )
+  }else{
+    return state
+  }  
  }
 
 function createStore (reducer) {
@@ -79,6 +85,10 @@ function createStore (reducer) {
 
 const store = createStore(todos)
 
+store.subscribe(() => {
+	console.log('The new state is: ', store.getState())
+})
+
 store.dispatch({
   type: 'ADD_TODO',
   todo: {
@@ -86,4 +96,24 @@ store.dispatch({
     name: 'Learn Redux',
     complete: false
   }
+})
+store.dispatch({
+  type: 'ADD_TODO',
+  todo: {
+    id: 1,
+    name: 'Learn pure functions',
+    complete: true
+  }
+})
+store.dispatch({
+  type: 'ADD_TODO',
+  todo: {
+    id: 2,
+    name: 'Learn vue js',
+    complete: false
+  }
+})
+store.dispatch({
+  type: 'TOGGLE_TODO',
+  id: 1
 })
