@@ -55,7 +55,7 @@ function removeTodoAction(id) {
 
 function toggleTodoAction(id) {
   return {
-    type: TOOGLE_TODO,
+    type: TOGGLE_TODO,
     id
   }
 }
