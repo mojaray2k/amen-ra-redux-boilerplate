@@ -133,9 +133,9 @@ store.dispatch(addTodoAction({
     complete: true
 }))
 
-store.dispatch(removeToDoAction(1))
+store.dispatch(removeTodoAction(1))
 
-store.dispatch(toggleToDoAction(0))
+store.dispatch(toggleTodoAction(0))
 
 store.dispatch(addGoalAction({
     id: 0,
